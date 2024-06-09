@@ -1,32 +1,155 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ContactUs = () => {
-    const { click, setClick, optionClick, setOptionClick } =
-        useContext(MyContext);
+        const { click, setClick, optionClick, setOptionClick } =
+            useContext(MyContext);
+        const [auth, setAuth] = useState({
+            logged: false,
+            email: '',
+            name: '',
+            number: 0,
+            emailError: ''
+        });
+        const [message, setMessage] = useState('');
+
+        const handleChange = (e) => {
+            setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        };
+
+        const handleSubmit = (e) => {
+            let emailErrorB = false;
+            e.preventDefault();
+            if (auth.logged && auth.email.length === 0 && message.length === 0)
+                return;
+            if (
+                !auth.logged &&
+                auth.email.trim().length > 0 &&
+                message.length > 0
+            ) {
+                const emailRegex =
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                console.log(message);
+                if (emailRegex.test(auth.email)) {
+                    console.log(auth.email);
+                    emailErrorB = false;
+                    setAuth((prev) => ({
+                        ...prev,
+                        emailError: ''
+                    }));
+                } else {
+                    emailErrorB = true;
+                    
+                    setAuth((prev) => ({
+                        ...prev,
+                        emailError: 'invalid email'
+                    }));
+                }
+            }
+            if (click === false) {
+                setAuth((prev) => ({ ...prev, email: '' }));
+                setMessage('');
+            }
+        };
+
+        const disabledLoggedOutState = auth.name.length === 0 || auth.number.toString().length <=9 || message.length=== 0;
     return (
         <form
-            className={`${poppins.className} ${
+            onSubmit={handleSubmit}
+            className={`${poppins.className} form-parent  ${
                 optionClick ? 'form-show' : 'form-close'
             }`}>
             <h2>
-                Let us know about the <span>Issue</span> you are facing right
-                now!
+                Let us know what <span>your queries</span> are!
             </h2>
             <hr />
             <div className={`form-container`}>
                 <div className='flex'>
-                    <label htmlFor=''>Choose a section</label>
-                    <select>
-                        <option value='Interview questions'>
-                            Interview Questions
-                        </option>
-                    </select>
+                    <label htmlFor=''>
+                        <p>Your Name</p>
+                        {!auth.logged && (
+                            <span>
+                                <svg
+                                    width='10'
+                                    height='10'
+                                    viewBox='0 0 10 10'
+                                    fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'>
+                                    <path
+                                        d='M5.00013 1V9M8.46413 3L1.53613 7M1.53613 3L8.46413 7'
+                                        stroke='#FD443A'
+                                        stroke-width='1.33333'
+                                        stroke-linecap='round'
+                                        stroke-linejoin='round'
+                                    />
+                                </svg>
+                            </span>
+                        )}
+                    </label>
+                    <input
+                        type='text'
+                        name='name'
+                        required
+                        value={auth.name}
+                        onChange={handleChange}
+                        placeholder='Enter your Name'
+                        className='contact-input'
+                    />
                 </div>
+
+                {!auth.logged && (
+                    <div className='flex'>
+                        <label htmlFor=''>
+                            <p>Your Email</p>
+                        </label>
+                        <input
+                            type='text'
+                            name='email'
+                            value={auth.email}
+                            onChange={handleChange}
+                            className='report-issue-input'
+                            placeholder='Enter your Email'
+                        />
+                    </div>
+                    
+                )}
+                {auth.emailError && <p className='error'>{auth.emailError}</p>}
+                {!auth.logged && (
+                    <div className='flex'>
+                        <label htmlFor=''>
+                            <p>Your Mobile Number</p>
+                            <span>
+                                <svg
+                                    width='10'
+                                    height='10'
+                                    viewBox='0 0 10 10'
+                                    fill='none'
+                                    xmlns='http://www.w3.org/2000/svg'>
+                                    <path
+                                        d='M5.00013 1V9M8.46413 3L1.53613 7M1.53613 3L8.46413 7'
+                                        stroke='#FD443A'
+                                        stroke-width='1.33333'
+                                        stroke-linecap='round'
+                                        stroke-linejoin='round'
+                                    />
+                                </svg>
+                            </span>
+                        </label>
+                        <input
+                            type='tel'
+                            name='number'
+                            value={Number(auth.number)}
+                            onChange={handleChange}
+                            placeholder='Enter your number'
+                            className='contact-input'
+                            required
+                        />
+                    </div>
+                )}
                 <div className='flex'>
                     <label htmlFor=''>
-                        <p>Describe the issue in detail</p>{' '}
+                        <p>What would you like to ask? </p>{' '}
                         <span>
                             <svg
                                 width='10'
@@ -45,9 +168,11 @@ const ContactUs = () => {
                         </span>
                     </label>
                     <textarea
-                        name=''
-                        id=''
-                        placeholder='Write here...'></textarea>
+                        name='message'
+                        required
+                        placeholder='Write here...'
+                        onChange={(e) => setMessage(e.target.value)}
+                        value={message}></textarea>
                     <button className='attach'>
                         <span>
                             <svg
@@ -65,7 +190,7 @@ const ContactUs = () => {
                         <p>Attach</p>
                     </button>
                 </div>
-                <button>Submit</button>
+                <button disabled={disabledLoggedOutState}>Submit</button>
             </div>
         </form>
     );

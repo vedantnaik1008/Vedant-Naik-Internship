@@ -1,54 +1,76 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ShareFeedback = () => {
     const { click, setClick, optionClick, setOptionClick } =
         useContext(MyContext);
+        const [auth, setAuth] = useState({
+            logged: false,
+            email: '',
+            emailError: ''
+        });
+const [message, setMessage] = useState('');
+        const handleChange = (e) => {
+            setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        };
+
+        const handleSubmit = (e) => {
+            let emailErrorB = false;
+            e.preventDefault();
+            if (auth.logged && auth.email.length === 0 && message.length === 0)
+                return;
+            if (
+                !auth.logged &&
+                auth.email.trim().length > 0 &&
+                message.length > 0
+            ) {
+                const emailRegex =
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                console.log(message);
+                if (emailRegex.test(auth.email)) {
+                    console.log(auth.email);
+                    emailErrorB = false;
+                    setAuth((prev) => ({
+                        ...prev,
+                        emailError: ''
+                    }));
+                } else {
+                    emailErrorB = true;
+
+                    setAuth((prev) => ({
+                        ...prev,
+                        emailError: 'invalid email'
+                    }));
+                }
+            }
+            if (click === false) {
+                setAuth((prev) => ({ ...prev, email: '' }));
+                setMessage('');
+            }
+        };
+
+        const disabledLoggedOutState = auth.email.length === 0 || message.length === 0;
     return (
         <form
-            className={`${poppins.className} ${
+            onSubmit={handleSubmit}
+            className={`${poppins.className} form-parent ${
                 optionClick ? 'form-show' : 'form-close'
             }`}>
             <h2>
-                Let us know about the <span>Issue</span> you are facing right
-                now!
+                Let us know your <span>Feedback</span> about us!
             </h2>
             <hr />
             <div className={`form-container`}>
                 <div className='flex'>
-                    <label htmlFor=''>Choose a section</label>
-                    <select>
-                        <option value='Interview questions'>
-                            Interview Questions
-                        </option>
-                    </select>
-                </div>
-                <div className='flex'>
-                    <label htmlFor=''>
-                        <p>Describe the issue in detail</p>{' '}
-                        <span>
-                            <svg
-                                width='10'
-                                height='10'
-                                viewBox='0 0 10 10'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <path
-                                    d='M5.00013 1V9M8.46413 3L1.53613 7M1.53613 3L8.46413 7'
-                                    stroke='#FD443A'
-                                    stroke-width='1.33333'
-                                    stroke-linecap='round'
-                                    stroke-linejoin='round'
-                                />
-                            </svg>
-                        </span>
-                    </label>
                     <textarea
-                        name=''
+                        name='message'
                         id=''
-                        placeholder='Write here...'></textarea>
-                    <button className='attach'>
+                        placeholder='Write here...'
+                        onChange={(e) => setMessage(e.target.value)}
+                        value={message}
+                        required></textarea>
+                    <button className='attach-sharefeedback'>
                         <span>
                             <svg
                                 width='10'
@@ -65,7 +87,32 @@ const ShareFeedback = () => {
                         <p>Attach</p>
                     </button>
                 </div>
-                <button>Submit</button>
+                {!auth.logged && (
+                    <label htmlFor='' className='anonymous'>
+                        <input type='checkbox' name='' id='' required /> Send
+                        feedback anonymously
+                    </label>
+                )}
+                {!auth.logged && (
+                    <div className='flex'>
+                        <label htmlFor=''>
+                            <p>Enter your email to receive an update</p>
+                        </label>
+                        <input
+                            type='text'
+                            name='email'
+                            value={auth.email}
+                            onChange={handleChange}
+                            className='report-issue-input'
+                            placeholder='Enter your Email'
+                            required
+                        />
+                    </div>
+                )}
+                {auth.emailError && <p className='error'>{auth.emailError}</p>}
+                <button disabled={disabledLoggedOutState} type='submit'>
+                    Submit
+                </button>
             </div>
         </form>
     );

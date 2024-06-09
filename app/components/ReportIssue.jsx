@@ -1,13 +1,64 @@
 'use client'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ReportIssue = () => {
     const { click, setClick, optionClick, setOptionClick } =
         useContext(MyContext);
-        console.log(optionClick)
+        const [auth, setAuth] = useState({
+            logged: false,
+            email: '',
+            emailError: ''
+        })
+        const [message, setMessage] = useState('')
+
+        const handleChange = (e) => {
+            setAuth((prev)=> ({...prev, [e.target.name]: e.target.value}))
+        }
+
+       const handleSubmit = (e) => {
+           let emailErrorB = false;
+           e.preventDefault();
+           if (auth.logged && auth.email.length === 0 && message.length === 0)
+               return;
+           if (
+               !auth.logged &&
+               auth.email.trim().length > 0 &&
+               message.length > 0
+           ) {
+               const emailRegex =
+                   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+               console.log(message);
+               if (emailRegex.test(auth.email)) {
+                   console.log(auth.email);
+                   emailErrorB = false;
+                   setAuth((prev) => ({
+                       ...prev,
+                       emailError: ''
+                   }));
+               } else {
+                   emailErrorB = true;
+
+                   setAuth((prev) => ({
+                       ...prev,
+                       emailError: 'invalid email'
+                   }));
+               }
+           }
+           if (click === false) {
+               setAuth((prev) => ({ ...prev, email: '' }));
+               setMessage('');
+           }
+       };
+
+
+const disabledLoggedOutState = auth.email.length === 0 || message.length === 0;
   return (
-      <form className={`${poppins.className} ${optionClick ?  'form-show' : 'form-close'}`}>
+      <form
+          onSubmit={handleSubmit}
+          className={`${poppins.className} form-parent  ${
+              optionClick ? 'form-show' : 'form-close'
+          }`}>
           <h2>
               Let us know about the <span>Issue</span> you are facing right now!
           </h2>
@@ -19,8 +70,17 @@ const ReportIssue = () => {
                       <option value='Interview questions'>
                           Interview Questions
                       </option>
+                      <option value='Concept cards'>Concept cards</option>
+                      <option value='Interview Questions'>
+                          Interview Questions
+                      </option>
+                      <option value='Practice Questions'>
+                          Practice Questions
+                      </option>
+                      <option value='Quizzes'>Quizzes</option>
                   </select>
               </div>
+
               <div className='flex'>
                   <label htmlFor=''>
                       <p>Describe the issue in detail</p>{' '}
@@ -42,9 +102,12 @@ const ReportIssue = () => {
                       </span>
                   </label>
                   <textarea
-                      name=''
-                      id=''
-                      placeholder='Write here...'></textarea>
+                      name='message'
+                      placeholder='Write here...'
+                      onChange={(e) => setMessage(e.target.value)}
+                      value={message}
+                      required
+                  />
                   <button className='attach'>
                       <span>
                           <svg
@@ -62,7 +125,42 @@ const ReportIssue = () => {
                       <p>Attach</p>
                   </button>
               </div>
-              <button>Submit</button>
+
+              {!auth.logged && (
+                  <div className='flex'>
+                      <label htmlFor=''>
+                          <p>Enter your email to receive an update</p>
+                          <span>
+                              <svg
+                                  width='10'
+                                  height='10'
+                                  viewBox='0 0 10 10'
+                                  fill='none'
+                                  xmlns='http://www.w3.org/2000/svg'>
+                                  <path
+                                      d='M5.00013 1V9M8.46413 3L1.53613 7M1.53613 3L8.46413 7'
+                                      stroke='#FD443A'
+                                      stroke-width='1.33333'
+                                      stroke-linecap='round'
+                                      stroke-linejoin='round'
+                                  />
+                              </svg>
+                          </span>
+                      </label>
+                      <input
+                          type='text'
+                          name='email'
+                          value={auth.email}
+                          onChange={handleChange}
+                          className='report-issue-input'
+                          placeholder='Enter your Email (optional)'
+                      />
+                  </div>
+              )}
+              {auth.emailError && <p className='error'>{auth.emailError}</p>}
+              <button disabled={disabledLoggedOutState} type='submit'>
+                  Submit
+              </button>
           </div>
       </form>
   );
