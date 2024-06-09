@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import FabActionButton from "./components/FabActionButton";
+import { ContextProvider } from "./Provider/contextProvider";
 
 export const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
       <html lang='en'>
           <body className={inter.className}>
-              <Header />
-              {children}
-              <FabActionButton />
+              <ContextProvider>
+                  <Header />
+                  {children}
+                  <FabActionButton />
+              </ContextProvider>
           </body>
       </html>
   );
