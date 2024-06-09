@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React from 'react'
 import leftArrow from '@/public/left-arrow.png'
 import { poppins } from '../page';
@@ -14,10 +13,10 @@ const Answers = () => {
   return (
       <section className='main-container section'>
           <div className='section-container'>
-              <Link href={'/'} className='back-to-questions Link'>
+              <div href={'/'} className='back-to-questions'>
                   <Image src={leftArrow} alt='lefft-arrow' width={40} />
                   <p className={`${poppins.className}`}>Back to Questions</p>
-              </Link>
+              </div>
 
               <div className='section-question-frame'>
                   <div className='question-first-row'>

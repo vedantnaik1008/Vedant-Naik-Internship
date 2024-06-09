@@ -1,12 +1,11 @@
 import { Hind } from 'next/font/google';
 import { questions } from '../data/QuestionsData.';
 import Image from 'next/image';
-import Link from 'next/link';
 const hind = Hind({ subsets: ['latin'], weight: '400' });
 
 const Question = () => {
     return (
-        <section>
+        <section className='question-section'>
             <h2>Practice Interview Questions</h2>
             <div className='question-filter-box'>
                 <div className='question-filter-box-flex'>
@@ -142,7 +141,7 @@ const Question = () => {
                                 </div>
                             </div>
                             <div className='third-row'>
-                                <Link href={'/answers'} className='Link'>
+                                <div href={'/answers'}>
                                     <div className='flex'>
                                         <Image
                                             src={value.comment.image}
@@ -152,7 +151,7 @@ const Question = () => {
                                         />{' '}
                                         <p>{value.comment.text}</p>
                                     </div>
-                                </Link>
+                                </div>
 
                                 <div className='flex'>
                                     <Image
