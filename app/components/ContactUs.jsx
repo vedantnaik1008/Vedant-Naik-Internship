@@ -3,57 +3,76 @@ import React, { useContext, useState } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ContactUs = () => {
-        const { click, setClick, optionClick, setOptionClick } =
-            useContext(MyContext);
-        const [auth, setAuth] = useState({
-            logged: false,
-            email: '',
-            name: '',
-            number: 0,
-            emailError: ''
-        });
-        const [message, setMessage] = useState('');
+        const {
+            click,
+            optionClick,
+            auth,
+            setAuth
+        } = useContext(MyContext);
 
-        const handleChange = (e) => {
-            setAuth((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-        };
-
+const [form, setForm] = useState({
+    email: '',
+    emailError: false,
+    emailErrorMessage: '',
+    phoneNumber: 0,
+    name: '',
+    message: '',
+    submit: false,
+    submitMessage: ''
+});
+const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+};
+let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const handleSubmit = (e) => {
-            let emailErrorB = false;
             e.preventDefault();
-            if (auth.logged && auth.email.length === 0 && message.length === 0)
-                return;
-            if (
-                !auth.logged &&
-                auth.email.trim().length > 0 &&
-                message.length > 0
-            ) {
-                const emailRegex =
-                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                console.log(message);
-                if (emailRegex.test(auth.email)) {
-                    console.log(auth.email);
-                    emailErrorB = false;
-                    setAuth((prev) => ({
+            
+            if (auth.logged || form.message.length > 0) {
+                console.log(form.message);
+                if (emailRegex.test(form.email)) {
+                    console.log(form.email);
+                    form.emailError = false
+                    setForm((prev) => ({
                         ...prev,
-                        emailError: ''
+                        emailErrorMessage: ''
                     }));
                 } else {
-                    emailErrorB = true;
+                    form.emailError = true;
                     
-                    setAuth((prev) => ({
+                    setForm((prev) => ({
                         ...prev,
-                        emailError: 'invalid email'
+                        emailErrorMessage: 'invalid email'
                     }));
                 }
             }
+            
+            if (form.submit === true && auth.logged) {
+                setForm((prev) => ({
+                    ...prev,
+                    submitMessage : 'Thanks for your valuable Suggestion!'
+                }));
+            }
+
             if (click === false) {
-                setAuth((prev) => ({ ...prev, email: '' }));
-                setMessage('');
+                setForm({
+                    email: '',
+                    emailError: false,
+                    emailErrorMessage: '',
+                    phoneNumber: 0,
+                    name: '',
+                    message: '',
+                    submit: false,
+                    submitMessage: ''
+                });
             }
         };
 
-        const disabledLoggedOutState = auth.name.length === 0 || auth.number.toString().length <=9 || message.length=== 0;
+        const disabledLoggedOutState = !auth.logged
+            ? form.name.length === 0 ||
+              form.phoneNumber.toString().length <= 9 ||
+              form.message.length === 0 ||
+              !emailRegex.test(form.email)
+            : form.name.length === 0 || form.message.length === 0;
     return (
         <form
             onSubmit={handleSubmit}
@@ -91,7 +110,7 @@ const ContactUs = () => {
                         type='text'
                         name='name'
                         required
-                        value={auth.name}
+                        value={form.name}
                         onChange={handleChange}
                         placeholder='Enter your Name'
                         className='contact-input'
@@ -106,15 +125,16 @@ const ContactUs = () => {
                         <input
                             type='text'
                             name='email'
-                            value={auth.email}
+                            value={form.email}
                             onChange={handleChange}
                             className='report-issue-input'
                             placeholder='Enter your Email'
                         />
                     </div>
-                    
                 )}
-                {auth.emailError && <p className='error'>{auth.emailError}</p>}
+                {auth.logged && !form.emailError && (
+                    <p className='error'>{form.emailErrorMessage}</p>
+                )}
                 {!auth.logged && (
                     <div className='flex'>
                         <label htmlFor=''>
@@ -138,8 +158,8 @@ const ContactUs = () => {
                         </label>
                         <input
                             type='tel'
-                            name='number'
-                            value={Number(auth.number)}
+                            name='phoneNumber'
+                            value={Number(form.phoneNumber)}
                             onChange={handleChange}
                             placeholder='Enter your number'
                             className='contact-input'
@@ -171,8 +191,8 @@ const ContactUs = () => {
                         name='message'
                         required
                         placeholder='Write here...'
-                        onChange={(e) => setMessage(e.target.value)}
-                        value={message}></textarea>
+                        onChange={handleChange}
+                        value={form.message}></textarea>
                     <button className='attach'>
                         <span>
                             <svg
@@ -190,7 +210,26 @@ const ContactUs = () => {
                         <p>Attach</p>
                     </button>
                 </div>
-                <button disabled={disabledLoggedOutState}>Submit</button>
+                <div className='submit-buttons'>
+                    <button
+                        type='button'
+                        onClick={() =>
+                            setAuth((prev) => ({
+                                ...prev,
+                                logged: !auth.logged
+                            }))
+                        }>
+                        {auth.logged ? 'Logout' : 'Login'}
+                    </button>
+                    <button
+                        disabled={disabledLoggedOutState}
+                        onClick={() =>
+                            setForm((prev) => ({ ...prev, submit: true }))
+                        }
+                        type='submit'>
+                        Submit
+                    </button>
+                </div>
             </div>
         </form>
     );

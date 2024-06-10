@@ -8,7 +8,7 @@ import GiveSuggestion from './GiveSuggestion';
 import ContactUs from './ContactUs';
 
 const FabActionButton = () => {
-    const { click, setClick, optionClick, setOptionClick, tab, setTab } =
+    const { click, setClick, optionClick, setOptionClick, tab, setTab, handleClose } =
         useContext(MyContext);
     console.log(tab);
     return (
@@ -186,6 +186,8 @@ const FabActionButton = () => {
                             </svg>
                         </button>
                     </div>
+
+                    
                     <button
                         className={`fab-mobile ${
                             !click
@@ -195,6 +197,7 @@ const FabActionButton = () => {
                         onClick={() => {
                             setClick(!click);
                             setOptionClick(false);
+                            handleClose();
                         }}>
                         {!click ? (
                             <svg

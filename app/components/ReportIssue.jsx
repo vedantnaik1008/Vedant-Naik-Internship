@@ -3,56 +3,74 @@ import React, { useContext, useState } from 'react'
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ReportIssue = () => {
-    const { click, setClick, optionClick, setOptionClick } =
-        useContext(MyContext);
-        const [auth, setAuth] = useState({
-            logged: false,
-            email: '',
-            emailError: ''
-        })
-        const [message, setMessage] = useState('')
+    const {
+        click,
+        optionClick,
+        auth,
+        setAuth
+    } = useContext(MyContext);
 
-        const handleChange = (e) => {
-            setAuth((prev)=> ({...prev, [e.target.name]: e.target.value}))
+    const [form, setForm] = useState({
+        email: '',
+        emailError: false,
+        emailErrorMessage: '',
+        phoneNumber: 0,
+        name: '',
+        message: '',
+        submit: false,
+        submitMessage: ''
+    });
+    const handleChange = (e) => {
+        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (auth.logged || form.message.length > 0) {
+            console.log(form.message);
+            if (emailRegex.test(form.email)) {
+                console.log(form.email);
+                form.emailError = false;
+                setForm((prev) => ({
+                    ...prev,
+                    emailErrorMessage: ''
+                }));
+            } else {
+                form.emailError = true;
+
+                setForm((prev) => ({
+                    ...prev,
+                    emailErrorMessage: 'invalid email'
+                }));
+            }
         }
 
-       const handleSubmit = (e) => {
-           let emailErrorB = false;
-           e.preventDefault();
-           if (auth.logged && auth.email.length === 0 && message.length === 0)
-               return;
-           if (
-               !auth.logged &&
-               auth.email.trim().length > 0 &&
-               message.length > 0
-           ) {
-               const emailRegex =
-                   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-               console.log(message);
-               if (emailRegex.test(auth.email)) {
-                   console.log(auth.email);
-                   emailErrorB = false;
-                   setAuth((prev) => ({
-                       ...prev,
-                       emailError: ''
-                   }));
-               } else {
-                   emailErrorB = true;
+        if (form.submit === true && auth.logged) {
+            setForm((prev) => ({
+                ...prev,
+                submitMessage: 'Thanks for your valuable Suggestion!'
+            }));
+        }
 
-                   setAuth((prev) => ({
-                       ...prev,
-                       emailError: 'invalid email'
-                   }));
-               }
-           }
-           if (click === false) {
-               setAuth((prev) => ({ ...prev, email: '' }));
-               setMessage('');
-           }
-       };
+        if (click === false) {
+            setForm({
+                email: '',
+                emailError: false,
+                emailErrorMessage: '',
+                phoneNumber: 0,
+                name: '',
+                message: '',
+                submit: false,
+                submitMessage: ''
+            });
+        }
+    };
 
 
-const disabledLoggedOutState = auth.email.length === 0 || message.length === 0;
+const disabledLoggedOutState = !auth.logged
+    ? form.message.length === 0 || !emailRegex.test(form.email)
+    : form.message.length === 0;
   return (
       <form
           onSubmit={handleSubmit}
@@ -104,8 +122,8 @@ const disabledLoggedOutState = auth.email.length === 0 || message.length === 0;
                   <textarea
                       name='message'
                       placeholder='Write here...'
-                      onChange={(e) => setMessage(e.target.value)}
-                      value={message}
+                      onChange={handleChange}
+                      value={form.message}
                       required
                   />
                   <button className='attach'>
@@ -150,17 +168,33 @@ const disabledLoggedOutState = auth.email.length === 0 || message.length === 0;
                       <input
                           type='text'
                           name='email'
-                          value={auth.email}
+                          value={form.email}
                           onChange={handleChange}
                           className='report-issue-input'
                           placeholder='Enter your Email (optional)'
                       />
                   </div>
               )}
-              {auth.emailError && <p className='error'>{auth.emailError}</p>}
-              <button disabled={disabledLoggedOutState} type='submit'>
-                  Submit
-              </button>
+              {auth.logged && !form.emailError && (
+                  <p className='error'>{form.emailErrorMessage}</p>
+              )}
+              <div className='submit-buttons'>
+                  <button
+                      type='button'
+                      onClick={() =>
+                          setAuth((prev) => ({ ...prev, logged: !auth.logged }))
+                      }>
+                      {auth.logged ? 'Logout' : 'Login'}
+                  </button>
+                  <button
+                      disabled={disabledLoggedOutState}
+                      onClick={() =>
+                          setForm((prev) => ({ ...prev, submit: true }))
+                      }
+                      type='submit'>
+                      Submit
+                  </button>
+              </div>
           </div>
       </form>
   );

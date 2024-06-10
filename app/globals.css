@@ -901,7 +901,14 @@ line-height: 16px;
 color: #0F0F0F;
 }
 
-
+.submit-buttons{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+    flex-grow: 1;
+    position: relative;
+}
 
 
 /* real */
