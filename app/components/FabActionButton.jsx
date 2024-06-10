@@ -2,10 +2,11 @@
 import React, { useContext } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
-import ReportIssue from './ReportIssue';
-import ShareFeedback from './ShareFeedback';
-import GiveSuggestion from './GiveSuggestion';
-import ContactUs from './ContactUs';
+import dynamic from 'next/dynamic';
+const ReportIssue = dynamic(() => import('./ReportIssue'));
+const ShareFeedback = dynamic(() => import('./ShareFeedback'));
+const GiveSuggestion = dynamic(() => import('./GiveSuggestion'));
+const ContactUs = dynamic(() => import('./ContactUs'));
 
 const FabActionButton = () => {
     const { click, setClick, optionClick, setOptionClick, tab, setTab, auth } =
