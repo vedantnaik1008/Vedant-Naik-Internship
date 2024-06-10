@@ -44,7 +44,9 @@ const ContactUs = () => {
                 }));
             }
         }
-
+if (form.email.length > 0) {
+    setAuth((prev) => ({ ...prev, logged: true }));
+}
         if (form.submit === true && auth.logged) {
             setForm((prev) => ({
                 ...prev,
@@ -178,7 +180,7 @@ const ContactUs = () => {
                     </button>
                 </div>
                 <div className='submit-buttons'>
-                    <button
+                    {/* <button
                         type='button'
                         onClick={() =>
                             setAuth((prev) => ({
@@ -187,18 +189,18 @@ const ContactUs = () => {
                             }))
                         }>
                         {auth.logged ? 'Logout' : 'Login'}
-                    </button>
+                    </button> */}
                     <button
                         disabled={disabledLoggedOutState}
                         onClick={() => {
                             setForm((prev) => ({ ...prev, submit: true }));
-                            setAuth((prev) => ({
-                                ...prev,
-                                submitEvent: {
-                                    submitMessage: form.submitMessage,
-                                    fireSubmit: form.submit
-                                }
-                            }));
+                            // setAuth((prev) => ({
+                            //     ...prev,
+                            //     submitEvent: {
+                            //         submitMessage: form.submitMessage,
+                            //         fireSubmit: form.submit
+                            //     }
+                            // }));
                         }}
                         type='submit'>
                         Submit

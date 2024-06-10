@@ -44,6 +44,9 @@ const ReportIssue = () => {
                 }));
             }
         }
+        if(form.email.length > 0){
+           setAuth((prev)=> ({...prev, logged: true}))
+        }
 
         if (form.submit === true && auth.logged) {
             setForm((prev) => ({
@@ -55,18 +58,18 @@ const ReportIssue = () => {
         setClick(()=> !click)
         setOptionClick(false)
 
-        if (click === false) {
-            setForm({
-                email: '',
-                emailError: false,
-                emailErrorMessage: '',
-                phoneNumber: 0,
-                name: '',
-                message: '',
-                submit: false,
-                submitMessage: ''
-            });
-        }
+        // if (click === false) {
+        //     setForm({
+        //         email: '',
+        //         emailError: false,
+        //         emailErrorMessage: '',
+        //         phoneNumber: 0,
+        //         name: '',
+        //         message: '',
+        //         submit: false,
+        //         submitMessage: ''
+        //     });
+        // }
         
     };
 
@@ -161,24 +164,24 @@ const disabledLoggedOutState = !auth.logged
                   <p className='error'>{form.emailErrorMessage}</p>
               )}
               <div className='submit-buttons'>
-                  <button
+                  {/* <button
                       type='button'
                       onClick={() =>
                           setAuth((prev) => ({ ...prev, logged: !auth.logged }))
                       }>
                       {auth.logged ? 'Logout' : 'Login'}
-                  </button>
+                  </button> */}
                   <button
                       disabled={disabledLoggedOutState}
                       onClick={() => {
                           setForm((prev) => ({ ...prev, submit: true }));
-                          setAuth((prev) => ({
-                              ...prev,
-                              submitEvent: {
-                                  submitMessage: form.submitMessage,
-                                  fireSubmit: form.submit
-                              }
-                          }));
+                        //   setAuth((prev) => ({
+                        //       ...prev,
+                        //       submitEvent: {
+                        //           submitMessage: form.submitMessage,
+                        //           fireSubmit: form.submit
+                        //       }
+                        //   }));
                       }}
                       type='submit'>
                       Submit
