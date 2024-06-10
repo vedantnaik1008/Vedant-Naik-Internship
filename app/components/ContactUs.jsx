@@ -49,7 +49,8 @@ let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (form.submit === true && auth.logged) {
                 setForm((prev) => ({
                     ...prev,
-                    submitMessage : 'Thanks for your valuable Suggestion!'
+                    submitMessage:
+                        `Thanks for reaching out to us! We will get back to you as soon as possible`
                 }));
             }
 
@@ -223,9 +224,16 @@ let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                     </button>
                     <button
                         disabled={disabledLoggedOutState}
-                        onClick={() =>
-                            setForm((prev) => ({ ...prev, submit: true }))
-                        }
+                        onClick={() => {
+                            setForm((prev) => ({ ...prev, submit: true }));
+                            setAuth((prev) => ({
+                                ...prev,
+                                submitEvent: {
+                                    submitMessage: form.submitMessage,
+                                    fireSubmit: form.submit
+                                }
+                            }));
+                        }}
                         type='submit'>
                         Submit
                     </button>

@@ -49,7 +49,7 @@ const ReportIssue = () => {
         if (form.submit === true && auth.logged) {
             setForm((prev) => ({
                 ...prev,
-                submitMessage: 'Thanks for your valuable Suggestion!'
+                submitMessage: `Thanks for bringing the issue to our attention. We'll review it shortly and provide an update soon!`
             }));
         }
 
@@ -188,9 +188,16 @@ const disabledLoggedOutState = !auth.logged
                   </button>
                   <button
                       disabled={disabledLoggedOutState}
-                      onClick={() =>
-                          setForm((prev) => ({ ...prev, submit: true }))
-                      }
+                      onClick={() =>{
+                          setForm((prev) => ({ ...prev, submit: true }));
+                          setAuth((prev) => ({
+                              ...prev,
+                              submitEvent: {
+                                  submitMessage: form.submitMessage,
+                                  fireSubmit: submit
+                              }
+                          }));
+                      }}
                       type='submit'>
                       Submit
                   </button>

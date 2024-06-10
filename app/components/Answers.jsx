@@ -1,5 +1,7 @@
+'use client'
+
 import Image from 'next/image';
-import React from 'react'
+import React, { useContext } from 'react'
 import leftArrow from '@/public/left-arrow.png'
 import { poppins } from '../page';
 import { eye, Rocket } from '../data/QuestionsData.';
@@ -8,8 +10,10 @@ import { inter } from '../layout';
 import userProfile from '@/public/user-profile.png';
 import likesImg from '@/public/Likes-img.png'
 import message from '@/public/message.png';
+import { MyContext } from '../Provider/contextProvider';
 
 const Answers = () => {
+    const { click, auth } = useContext(MyContext);
   return (
       <section className='main-container section'>
           <div className='section-container'>
@@ -18,7 +22,8 @@ const Answers = () => {
                   <p className={`${poppins.className}`}>Back to Questions</p>
               </div>
 
-              <div className='section-question-frame'>
+                <div className="answer-container-flex">
+                    <div className={`section-question-frame ${click ? 'question-frame-margin' : ''}`}>
                   <div className='question-first-row'>
                       <div className={`question-row ${inter.className}`}>
                           <button>Design</button>
@@ -69,29 +74,31 @@ const Answers = () => {
                       </div>
                   </div>
               </div>
-              <div className='section-answer-frame'>
-                  <div className={`answers-sortby ${poppins.className}`}>
-                      <p>Answers (23)</p>
-                      <label htmlFor=''>
-                          <p className={inter.className}>Sort By:</p>
-                          <svg
-                              className='down-arrow'
-                              width='21'
-                              height='9'
-                              viewBox='0 0 21 9'
-                              fill='none'
-                              xmlns='http://www.w3.org/2000/svg'>
-                              <path
-                                  d='M0.919067 0.231445L10.9596 8.76876L21 0.231445H0.919067Z'
-                                  fill='#2A2A2A'
-                              />
-                          </svg>
 
-                          <select className={poppins.className}>
-                              <option value='popular'>Popular</option>
-                          </select>
-                      </label>
-                  </div>
+              <div className={`answers-sortby ${poppins.className} ${click ? 'answer-sortby-order' : ''}`}>
+                  <p>Answers (23)</p>
+                  <label htmlFor=''>
+                      <p className={inter.className}>Sort By:</p>
+                      <svg
+                          className='down-arrow'
+                          width='21'
+                          height='9'
+                          viewBox='0 0 21 9'
+                          fill='none'
+                          xmlns='http://www.w3.org/2000/svg'>
+                          <path
+                              d='M0.919067 0.231445L10.9596 8.76876L21 0.231445H0.919067Z'
+                              fill='#2A2A2A'
+                          />
+                      </svg>
+
+                      <select className={poppins.className}>
+                          <option value='popular'>Popular</option>
+                      </select>
+                  </label>
+              </div>
+
+              <div className='section-answer-frame'>
                   <div className={`user-answer-frame ${poppins.className}`}>
                       <div className='user'>
                           <div className='user-profile'>
@@ -163,6 +170,8 @@ const Answers = () => {
                       </div>
                   </div>
               </div>
+                </div>
+              
           </div>
       </section>
   );

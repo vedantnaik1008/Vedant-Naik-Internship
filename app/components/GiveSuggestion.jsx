@@ -185,9 +185,16 @@ const disabledLoggedOutState = !auth.logged
                     </button>
                     <button
                         disabled={disabledLoggedOutState}
-                        onClick={() =>
-                            setForm((prev) => ({ ...prev, submit: true }))
-                        }
+                        onClick={() => {
+                            setForm((prev) => ({ ...prev, submit: true }));
+                            setAuth((prev) => ({
+                                ...prev,
+                                submitEvent: {
+                                    submitMessage: form.submitMessage,
+                                    fireSubmit: form.submit
+                                }
+                            }));
+                        }}
                         type='submit'>
                         Submit
                     </button>

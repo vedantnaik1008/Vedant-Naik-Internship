@@ -48,7 +48,7 @@ const ShareFeedback = () => {
      if (form.submit === true && auth.logged) {
          setForm((prev) => ({
              ...prev,
-             submitMessage: 'Thanks for your valuable Suggestion!'
+             submitMessage: 'Thanks for your valuable feedback!'
          }));
      }
 
@@ -142,9 +142,16 @@ const disabledLoggedOutState = !auth.logged
                     </button>
                     <button
                         disabled={disabledLoggedOutState}
-                        onClick={() =>
-                            setForm((prev) => ({ ...prev, submit: true }))
-                        }
+                        onClick={() => {
+                            setForm((prev) => ({ ...prev, submit: true }));
+                            setAuth((prev) => ({
+                                ...prev,
+                                submitEvent: {
+                                    submitMessage: form.submitMessage,
+                                    fireSubmit: form.submit
+                                }
+                            }));
+                        }}
                         type='submit'>
                         Submit
                     </button>
