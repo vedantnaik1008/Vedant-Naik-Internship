@@ -1,6 +1,6 @@
-import Rocket from '@/public/Rocket.png';
-import comment from '@/public/comment.png';
-import eye from '@/public/eye.png';
+import Rocket from '@/public/svg/rocket.svg';
+import comment from '@/public/svg/comment.svg';
+import eye from '@/public/svg/eye.svg';
 
 export const questions = [
     {

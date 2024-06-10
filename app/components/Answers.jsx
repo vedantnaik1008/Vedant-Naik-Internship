@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import React, { useContext } from 'react'
-import leftArrow from '@/public/left-arrow.png'
+import leftArrow from '@/public/svg/left-arrow.svg'
 import { poppins } from '../page';
 import { eye, Rocket } from '../data/QuestionsData.';
-import information from '@/public/information.png';
+import information from '@/public/svg/information.svg';
 import { inter } from '../layout';
-import userProfile from '@/public/user-profile.png';
-import likesImg from '@/public/Likes-img.png'
-import message from '@/public/message.png';
+import userProfile from '@/public/svg/user-profile.svg';
+import likesImg from '@/public/svg/likes.svg'
+import message from '@/public/svg/message.svg';
 import { MyContext } from '../Provider/contextProvider';
 import downArrrow from '@/public/svg/down-arrow.svg'
 import edit from '@/public/svg/edit.svg';

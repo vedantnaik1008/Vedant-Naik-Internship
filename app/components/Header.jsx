@@ -1,6 +1,6 @@
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
-import userProfile from '@/public/user-profile.png';
+import userProfile from '@/public/svg/user-profile.svg';
 import { inter } from '../layout';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
