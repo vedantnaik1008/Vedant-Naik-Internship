@@ -3,12 +3,8 @@ import React, { useContext, useState } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ShareFeedback = () => {
-    const {
-        click,
-        optionClick,
-        auth,
-        setAuth
-    } = useContext(MyContext);
+    const { click, optionClick, auth, setAuth, setClick, setOptionClick } =
+        useContext(MyContext);
  const [form, setForm] = useState({
      email: '',
      emailError: false,
@@ -51,6 +47,9 @@ const ShareFeedback = () => {
              submitMessage: 'Thanks for your valuable feedback!'
          }));
      }
+
+     setClick(() => !click);
+     setOptionClick(false);
 
      if (click === false) {
          setForm({

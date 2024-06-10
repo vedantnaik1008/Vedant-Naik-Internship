@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const GiveSuggestion = () => {
-    const { click, optionClick, auth, setAuth } =
+    const { click, optionClick, auth, setAuth, setClick, setOptionClick } =
         useContext(MyContext);
 const [form, setForm] = useState({
     email: '',
@@ -47,6 +47,9 @@ const handleSubmit = (e) => {
             submitMessage: 'Thanks for your valuable Suggestion!'
         }));
     }
+
+    setClick(() => !click);
+    setOptionClick(false);
 
     if (click === false) {
         setForm({

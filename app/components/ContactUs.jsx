@@ -7,7 +7,9 @@ const ContactUs = () => {
             click,
             optionClick,
             auth,
-            setAuth
+            setAuth,
+            setClick,
+            setOptionClick
         } = useContext(MyContext);
 
 const [form, setForm] = useState({
@@ -53,6 +55,9 @@ let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                         `Thanks for reaching out to us! We will get back to you as soon as possible`
                 }));
             }
+
+            setClick(() => !click);
+            setOptionClick(false);
 
             if (click === false) {
                 setForm({
