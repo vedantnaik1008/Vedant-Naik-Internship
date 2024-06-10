@@ -20,13 +20,13 @@ const FabActionButton = () => {
                         click
                             ? `option-list ${
                                   optionClick
-                                      ? 'option-animate-show'
-                                      : 'option-list-1'
+                                      ? 'option-animate-show option-list-unfloat'
+                                      : 'option-list-1 option-list-float'
                               } `
                             : `close ${
                                   optionClick
-                                      ? 'option-animate-close'
-                                      : 'close-1'
+                                      ? 'option-animate-close .close-unfloat'
+                                      : 'close-1 close-float'
                               }`
                     }`}>
                     <div
@@ -43,7 +43,9 @@ const FabActionButton = () => {
                             Report an Issue
                         </p>
                         <button
-                            className={`${tab === 'report issue' ? 'rounded-outline' : ''} fab-mobile-bgcolor-option`}>
+                            className={`${
+                                tab === 'report issue' ? 'rounded-outline' : ''
+                            } fab-mobile-bgcolor-option`}>
                             <svg
                                 width='19'
                                 height='20'
@@ -72,7 +74,9 @@ const FabActionButton = () => {
                         </p>
                         <button
                             className={`${
-                                tab === 'share feedback' ? 'rounded-outline' : ''
+                                tab === 'share feedback'
+                                    ? 'rounded-outline'
+                                    : ''
                             } fab-mobile-bgcolor-option`}>
                             <svg
                                 width='28'
@@ -114,7 +118,9 @@ const FabActionButton = () => {
                         </p>
                         <button
                             className={`${
-                                tab === 'give suggestion' ? 'rounded-outline' : ''
+                                tab === 'give suggestion'
+                                    ? 'rounded-outline'
+                                    : ''
                             } fab-mobile-bgcolor-option`}>
                             <svg
                                 width='28'

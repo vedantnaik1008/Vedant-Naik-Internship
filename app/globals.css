@@ -590,6 +590,18 @@ hr {
     gap: 15px;
 }
 
+.option-list-float, .close-float{
+ position: fixed;
+ right: 24px;
+ bottom: 24px;
+}
+
+.option-list-unfloat, .close-unfloat{
+ position: static;
+ /* right: 24px;
+ bottom: 24px; */
+}
+
 .option-list .flex,
 .close .flex {
     display: flex;
@@ -636,8 +648,8 @@ hr {
 
 .fab-parent{
 position: absolute;
-    bottom: 0px;
-    right: 0px;
+    bottom: 0%;
+    right: 0%;
     left: 0px;
     z-index: 100;
 }
@@ -969,5 +981,23 @@ color: #0F0F0F;
     }
     .section {
         display: block;
+    }
+    .fab-parent{
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+    .option-animate-show{
+        order: 1;
+    }
+    .overlay{
+        display: none;
+    }
+    form{
+        border-radius: 20px;
+        box-shadow: -2px 4px 16px 0px #00000029;
+padding: 24px 16px 24px 16px;
+width: 430px;
+margin: 0 10px 10px 0;
     }
 }
