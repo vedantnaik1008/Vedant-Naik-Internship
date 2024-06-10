@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 import dynamic from 'next/dynamic';
@@ -9,8 +9,9 @@ const GiveSuggestion = dynamic(() => import('./GiveSuggestion'));
 const ContactUs = dynamic(() => import('./ContactUs'));
 
 const FabActionButton = () => {
-    const { click, setClick, optionClick, setOptionClick, tab, setTab, auth } =
+    const { click, setClick, optionClick, setOptionClick, tab, setTab, auth, setAuth } =
         useContext(MyContext);
+
     console.log(tab);
     return (
         <>

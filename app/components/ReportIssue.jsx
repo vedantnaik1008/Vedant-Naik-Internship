@@ -3,12 +3,8 @@ import React, { useContext, useState } from 'react'
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 const ReportIssue = () => {
-    const {
-        click,
-        optionClick,
-        auth,
-        setAuth
-    } = useContext(MyContext);
+    const { click, setClick, optionClick, auth, setAuth, setOptionClick } =
+        useContext(MyContext);
 
     const [form, setForm] = useState({
         email: '',
@@ -53,6 +49,9 @@ const ReportIssue = () => {
             }));
         }
 
+        setClick(()=> !click)
+        setOptionClick(false)
+
         if (click === false) {
             setForm({
                 email: '',
@@ -65,6 +64,7 @@ const ReportIssue = () => {
                 submitMessage: ''
             });
         }
+        
     };
 
 
@@ -188,7 +188,7 @@ const disabledLoggedOutState = !auth.logged
                   </button>
                   <button
                       disabled={disabledLoggedOutState}
-                      onClick={() =>{
+                      onClick={() => {
                           setForm((prev) => ({ ...prev, submit: true }));
                           setAuth((prev) => ({
                               ...prev,
