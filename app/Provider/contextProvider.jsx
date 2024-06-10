@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 
-// Create a Context
 export const MyContext = React.createContext();
 
 export const ContextProvider = ({ children }) => {
