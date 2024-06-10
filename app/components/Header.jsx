@@ -1,6 +1,7 @@
 import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import userProfile from '@/public/svg/user-profile.svg';
+import headerDown from '@/public/svg/header-down-arrow.svg';
 import { inter } from '../layout';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -18,39 +19,23 @@ const Header = () => {
                     <li>
                         <p>Learn</p>
                         <span>
-                            <svg
-                                width='21'
-                                height='13'
-                                viewBox='0 0 21 13'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <path
-                                    d='M2.7395 2L10.4034 10L18.3698 2'
-                                    stroke='#FEFEFE'
-                                    stroke-opacity='0.5'
-                                    stroke-width='4'
-                                    stroke-linecap='round'
-                                />
-                            </svg>
+                            <Image
+                                src={headerDown}
+                                alt='svg'
+                                width={21}
+                                height={13}
+                            />
                         </span>
                     </li>
                     <li>
                         <p>Practice</p>
                         <span>
-                            <svg
-                                width='21'
-                                height='13'
-                                viewBox='0 0 21 13'
-                                fill='none'
-                                xmlns='http://www.w3.org/2000/svg'>
-                                <path
-                                    d='M2.7395 2L10.4034 10L18.3698 2'
-                                    stroke='#FEFEFE'
-                                    stroke-opacity='0.5'
-                                    stroke-width='4'
-                                    stroke-linecap='round'
-                                />
-                            </svg>
+                            <Image
+                                src={headerDown}
+                                alt='svg'
+                                width={21}
+                                height={13}
+                            />
                         </span>
                     </li>
                     <li>
