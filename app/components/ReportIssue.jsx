@@ -194,7 +194,7 @@ const disabledLoggedOutState = !auth.logged
                               ...prev,
                               submitEvent: {
                                   submitMessage: form.submitMessage,
-                                  fireSubmit: submit
+                                  fireSubmit: form.submit
                               }
                           }));
                       }}
