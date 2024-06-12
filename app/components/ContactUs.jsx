@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
 import { useEmail } from '../hooks/useEmail';
-import SubmitButton from './submitButton';
+import SubmitButton from './SubmitButton';
 import Input from './Input';
 import Textarea from './Textarea';
 const ContactUs = () => {
