@@ -19,7 +19,6 @@ export const ContextProvider = ({ children }) => {
         }
     });
 
-
     return (
         <MyContext.Provider
             value={{

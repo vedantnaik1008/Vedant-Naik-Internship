@@ -414,6 +414,7 @@ margin: 0px auto 20px auto;
 .answer-sortby-order{
     order: -1;
     margin: 0px auto 20px auto;
+    transition: all 300ms ease-in-out;
 }
 
 

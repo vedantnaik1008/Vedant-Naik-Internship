@@ -1,75 +1,16 @@
 'use client';
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { poppins } from '../page';
 import { MyContext } from '../Provider/contextProvider';
-import redStar from '@/public/svg/red-star.svg';
-import attach from '@/public/svg/attach.svg';
-import Image from 'next/image';
+import { useEmail } from '../hooks/useEmail';
+import SubmitButton from './submitButton';
+import Input from './Input';
+import Textarea from './Textarea';
 const ContactUs = () => {
-    const { click, optionClick, auth, setAuth, setClick, setOptionClick } =
-        useContext(MyContext);
+    const { optionClick, auth, setAuth } = useContext(MyContext);
 
-    const [form, setForm] = useState({
-        email: '',
-        emailError: false,
-        emailErrorMessage: '',
-        phoneNumber: 0,
-        name: '',
-        message: '',
-        submit: false,
-        submitMessage: ''
-    });
-    const handleChange = (e) => {
-        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-    let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (auth.logged || form.message.length > 0) {
-            console.log(form.message);
-            if (emailRegex.test(form.email)) {
-                console.log(form.email);
-                form.emailError = false;
-                setForm((prev) => ({
-                    ...prev,
-                    emailErrorMessage: ''
-                }));
-            } else {
-                form.emailError = true;
-
-                setForm((prev) => ({
-                    ...prev,
-                    emailErrorMessage: 'invalid email'
-                }));
-            }
-        }
-if (form.email.length > 0) {
-    setAuth((prev) => ({ ...prev, logged: true }));
-}
-        if (form.submit === true && auth.logged) {
-            setForm((prev) => ({
-                ...prev,
-                submitMessage: `Thanks for reaching out to us! We will get back to you as soon as possible`
-            }));
-        }
-
-        setClick(() => !click);
-        setOptionClick(false);
-
-        if (click === false) {
-            setForm({
-                email: '',
-                emailError: false,
-                emailErrorMessage: '',
-                phoneNumber: 0,
-                name: '',
-                message: '',
-                submit: false,
-                submitMessage: ''
-            });
-        }
-    };
+    const { handleChange, handleSubmit, emailRegex, form, setForm } =
+        useEmail();
 
     const disabledLoggedOutState = !auth.logged
         ? form.name.length === 0 ||
@@ -77,6 +18,7 @@ if (form.email.length > 0) {
           form.message.length === 0 ||
           !emailRegex.test(form.email)
         : form.name.length === 0 || form.message.length === 0;
+
     return (
         <form
             onSubmit={handleSubmit}
@@ -88,124 +30,78 @@ if (form.email.length > 0) {
             </h2>
             <hr />
             <div className={`form-container`}>
-                <div className='flex'>
-                    <label htmlFor=''>
-                        <p>Your Name</p>
-                        {!auth.logged && (
-                            <span>
-                                <Image
-                                    src={redStar}
-                                    width={10}
-                                    height={10}
-                                    alt='svg'
-                                />
-                            </span>
-                        )}
-                    </label>
-                    <input
-                        type='text'
-                        name='name'
-                        required
+                {!auth.logged ? (
+                    <Input
+                        redAsterix={true}
+                        type={'text'}
+                        labelName={'Your Name'}
+                        className={'contact-input'}
+                        placeholder={'Enter your Name'}
+                        name={'name'}
+                        handleChange={handleChange}
                         value={form.name}
-                        onChange={handleChange}
-                        placeholder='Enter your Name'
-                        className='contact-input'
+                        require={true}
                     />
-                </div>
+                ) : (
+                    <Input
+                        redAsterix={false}
+                        type={'text'}
+                        labelName={'Your Name'}
+                        className={'contact-input'}
+                        placeholder={'Enter your Name'}
+                        name={'name'}
+                        handleChange={handleChange}
+                        value={form.name}
+                        require={true}
+                    />
+                )}
 
                 {!auth.logged && (
-                    <div className='flex'>
-                        <label htmlFor=''>
-                            <p>Your Email</p>
-                        </label>
-                        <input
-                            type='text'
-                            name='email'
-                            value={form.email}
-                            onChange={handleChange}
-                            className='report-issue-input'
-                            placeholder='Enter your Email'
-                        />
-                    </div>
+                    <Input
+                        redAsterix={false}
+                        type={'text'}
+                        labelName={'Your Email'}
+                        className={'report-issue-input'}
+                        placeholder={'Enter your Email'}
+                        name={'email'}
+                        handleChange={handleChange}
+                        value={form.email}
+                        require={false}
+                    />
                 )}
                 {auth.logged && !form.emailError && (
                     <p className='error'>{form.emailErrorMessage}</p>
                 )}
                 {!auth.logged && (
-                    <div className='flex'>
-                        <label htmlFor=''>
-                            <p>Your Mobile Number</p>
-                            <span>
-                                <Image
-                                    src={redStar}
-                                    width={10}
-                                    height={10}
-                                    alt='svg'
-                                />
-                            </span>
-                        </label>
-                        <input
-                            type='tel'
-                            name='phoneNumber'
-                            value={Number(form.phoneNumber)}
-                            onChange={handleChange}
-                            placeholder='Enter your number'
-                            className='contact-input'
-                            required
-                        />
-                    </div>
+                    <Input
+                        redAsterix={true}
+                        type={'tel'}
+                        labelName={'Your Mobile Number'}
+                        className={'contact-input'}
+                        placeholder={'Enter your number'}
+                        name={'phoneNumber'}
+                        handleChange={handleChange}
+                        value={Number(form.phoneNumber)}
+                        require={true}
+                    />
                 )}
-                <div className='flex'>
-                    <label htmlFor=''>
-                        <p>What would you like to ask? </p>{' '}
-                        <Image src={redStar} width={10} height={10} alt='svg' />
-                    </label>
-                    <textarea
-                        name='message'
-                        required
-                        placeholder='Write here...'
-                        onChange={handleChange}
-                        value={form.message}></textarea>
-                    <button className='attach'>
-                        <span>
-                            <Image
-                                src={attach}
-                                width={10}
-                                height={20}
-                                alt='svg'
-                            />
-                            
-                        </span>
-                        <p>Attach</p>
-                    </button>
-                </div>
-                <div className='submit-buttons'>
-                    {/* <button
-                        type='button'
-                        onClick={() =>
-                            setAuth((prev) => ({
-                                ...prev,
-                                logged: !auth.logged
-                            }))
-                        }>
-                        {auth.logged ? 'Logout' : 'Login'}
-                    </button> */}
-                    <button
-                        disabled={disabledLoggedOutState}
-                        onClick={() => {
-                            setForm((prev) => ({ ...prev, submit: true }));
-                            // setAuth((prev) => ({
-                            //     ...prev,
-                            //     submitEvent: {
-                            //         submitMessage: form.submitMessage,
-                            //         fireSubmit: form.submit
-                            //     }
-                            // }));
-                        }}
-                        type='submit'>
-                        Submit
-                    </button>
-                </div>
+                <Textarea
+                    redAsterix={true}
+                    labelName={'What would you like to ask?'}
+                    placeholder={'Write here...'}
+                    name={'message'}
+                    handleChange={handleChange}
+                    value={form.message}
+                    require={true}
+                    requireLabelName={true}
+                    className={'attach'}
+                />
+                <SubmitButton
+                    disabledLoggedOutState={disabledLoggedOutState}
+                    setForm={setForm}
+                    setAuth={setAuth}
+                    form={form}
+                />
             </div>
         </form>
     );
