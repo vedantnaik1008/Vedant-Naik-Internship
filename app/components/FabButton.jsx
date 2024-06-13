@@ -8,7 +8,7 @@ import { useEmail } from '../hooks/useEmail';
 
 const FabButton = ({ click, setClick, setOptionClick, setTab, auth, tab }) => {
     const { form, setForm } = useEmail();
-    const nn = JSON.parse(localStorage.getItem('formData')) || '';
+    const nn = JSON.parse(localStorage?.getItem('formData'));
 
     useEffect(() => {
         let timer;
