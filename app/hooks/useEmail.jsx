@@ -22,6 +22,7 @@ export const useEmail = () => {
                  setForm(parsedData);
             }
         }, [])
+
         const handleChange = (e) => {
             setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
         };
@@ -61,22 +62,31 @@ export const useEmail = () => {
                     return 'Thanks for reaching out to us! We will get back to you as soon as possible';
                 }
             }
-            if (form.submit === true && auth.logged) {
+            let currentTabMessage = getCurrentTabMessage(tab);
+            if (auth.logged) {
                 setForm((prev) => {
-                    const currentTabMessage = getCurrentTabMessage(tab);
+                    
                     const newForm = {
                         ...prev,
                         submitMessage: currentTabMessage,
+                        submit: true
                     };
 
                     localStorage.setItem('formData', JSON.stringify(newForm));
-
                     return newForm;
                 });
+            } else {
+                localStorage.setItem(
+                    'formData',
+                    JSON.stringify({
+                        ...form,
+                        submitMessage: currentTabMessage
+                    })
+                );
             }
-            localStorage.setItem('formData', JSON.stringify(form));
             setClick(() => !click);
             setOptionClick(false);
+            console.log(auth.logged, form.submit);
         };
   return { handleChange, handleSubmit, emailRegex, form, setForm}
 }

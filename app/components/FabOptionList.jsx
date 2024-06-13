@@ -13,7 +13,6 @@ const FabOptionList = ({
     auth,
     setClick
 }) => {
-    console.log(optionList);
     return (
         <div
             className={`${poppins.className} ${

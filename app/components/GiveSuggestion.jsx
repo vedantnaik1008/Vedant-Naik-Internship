@@ -12,7 +12,6 @@ const GiveSuggestion = () => {
     const { handleChange, handleSubmit, emailRegex, form, setForm } =
         useEmail();
 
-    console.log(auth);
     const disabledLoggedOutState = !auth.logged
         ? form.message.length === 0 || !emailRegex.test(form.email)
         : form.message.length === 0;

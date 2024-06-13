@@ -1,20 +1,16 @@
 'use client'
 
 const SubmitButton = ({ disabledLoggedOutState, setForm, setAuth, form }) => {
+    // const handleChange = () => {
+    //     localStorage.setItem('formData', JSON.stringify(setForm((prev) => ({ ...prev, submit: true }))))
+        
+    // }
+
     return (
         <div className='submit-buttons'>
             <button
                 disabled={disabledLoggedOutState}
-                onClick={() => {
-                    setForm((prev) => ({ ...prev, submit: true }));
-                    setAuth((prev) => ({
-                        ...prev,
-                        submitEvent: {
-                            submitMessage: form.submitMessage,
-                            fireSubmit: form.submit
-                        }
-                    }));
-                }}
+                // onClick={handleChange}
                 type='submit'>
                 Submit
             </button>
