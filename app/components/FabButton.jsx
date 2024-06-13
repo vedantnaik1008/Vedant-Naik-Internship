@@ -8,32 +8,35 @@ import { useEmail } from '../hooks/useEmail';
 
 const FabButton = ({ click, setClick, setOptionClick, setTab, auth, tab }) => {
     const { form, setForm } = useEmail();
-    const nn = JSON.parse(localStorage?.getItem('formData'));
+        let nn;
+        if (typeof window !== 'undefined') {
+            nn = JSON.parse(window.localStorage.getItem('formData'));
+        }
 
     useEffect(() => {
         let timer;
-        if (auth.logged && nn.submit) {
+        if (auth.logged && nn?.submit) {
             timer = setTimeout(() => {
                 const updatedFormData = { ...nn, submit: false };
 
-                // Update the local storage with the cleared submitMessage
-                localStorage.setItem(
-                    'formData',
-                    JSON.stringify(updatedFormData)
-                );
+                 if (typeof window !== 'undefined') {
+                     window.localStorage.setItem(
+                         'formData',
+                         JSON.stringify(updatedFormData)
+                     );
+                 }
 
-                // Update the state to reflect the change
                 setForm(updatedFormData);
             }, 3000);
 
             return () => clearTimeout(timer);
         }
-    }, [auth.logged, setForm, nn.submit, nn]);
+    }, [auth.logged, setForm, nn?.submit, nn]);
 
 
-    const currentTabMessage = auth.logged && nn.submit;
+    const currentTabMessage = auth.logged && nn?.submit;
 
-    console.log(nn.submit);
+    console.log(nn?.submit);
     return (
         <div className='fab-messages'>
             {currentTabMessage && <p>{nn.submitMessage}</p>}
