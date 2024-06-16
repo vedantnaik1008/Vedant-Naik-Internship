@@ -3,43 +3,34 @@ import fab_mobile_svg from '@/public/svg/fab-mobile-star-hand.svg';
 import fab_desktop_svg from '@/public/svg/fab-desktop-svg.svg';
 import close_form from '@/public/svg/close-form.svg';
 import Image from 'next/image';
-import { useEffect } from 'react';
 import { useEmail } from '../hooks/useEmail';
+import { useContext, useEffect } from 'react';
+import { MyContext } from '../Provider/contextProvider';
 
-const FabButton = ({ click, setClick, setOptionClick, setTab, auth, tab }) => {
+const FabButton = ({ click, setClick, setOptionClick }) => {
     const { form, setForm } = useEmail();
-        let nn;
-        if (typeof window !== 'undefined') {
-            nn = JSON.parse(window.localStorage.getItem('formData'));
-        }
+    const { setAuth, auth } = useContext(MyContext);
 
     useEffect(() => {
         let timer;
-        if (auth.logged && nn?.submit) {
+        if (auth.logged && auth.submitEvent) {
             timer = setTimeout(() => {
-                const updatedFormData = { ...nn, submit: false };
-
-                 if (typeof window !== 'undefined') {
-                     window.localStorage.setItem(
-                         'formData',
-                         JSON.stringify(updatedFormData)
-                     );
-                 }
-
-                setForm(updatedFormData);
+                setAuth((prev) => ({ ...prev, submitEvent: false }));
             }, 3000);
-
-            return () => clearTimeout(timer);
+            if (timer) {
+                return () => clearTimeout(timer);
+            }
         }
-    }, [auth.logged, setForm, nn?.submit, nn]);
+    }, [auth.logged, auth.submitEvent]);
 
+    const currentTabMessage = auth.logged && auth.submitEvent;
+    console.log(
+        `currentTabMessage, auth.logged: ${auth.logged} && auth.submitEvent: ${auth.submitEvent} && ${auth.submitMessage}`
+    );
 
-    const currentTabMessage = auth.logged && nn?.submit;
-
-    console.log(nn?.submit);
     return (
         <div className='fab-messages'>
-            {currentTabMessage && <p>{nn.submitMessage}</p>}
+            {currentTabMessage && <p>{auth.submitMessage}</p>}
             <button
                 className={`fab-mobile ${
                     !click
@@ -47,8 +38,8 @@ const FabButton = ({ click, setClick, setOptionClick, setTab, auth, tab }) => {
                         : 'fab-mobile-bgcolor-close'
                 } `}
                 onClick={() => {
-                    setClick(!click);
                     setOptionClick(false);
+                    setClick(!click);
                 }}>
                 {!click ? (
                     <>

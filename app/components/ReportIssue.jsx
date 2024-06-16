@@ -12,8 +12,8 @@ const ReportIssue = () => {
     const { handleChange, handleSubmit, emailRegex, form, setForm } = useEmail();
 
     const disabledLoggedOutState = !auth.logged
-        ? form.message.length === 0 || !emailRegex.test(form.email)
-        : form.message.length === 0;
+        ? form?.message.length === 0 || !emailRegex.test(form.email)
+        : form?.message.length === 0;
     return (
         <form
             onSubmit={handleSubmit}
@@ -49,7 +49,7 @@ const ReportIssue = () => {
                     placeholder={'Write here...'}
                     name={'message'}
                     handleChange={handleChange}
-                    value={form.message}
+                    value={form?.message}
                     require={true}
                     requireLabelName={true}
                     className={'attach'}

@@ -58,7 +58,6 @@ const FabOptionList = ({
                 click={click}
                 optionClick={optionClick}
                 setOptionClick={setOptionClick}
-                auth={auth}
                 setTab={setTab}
                 setClick={setClick}
                 tab={tab}

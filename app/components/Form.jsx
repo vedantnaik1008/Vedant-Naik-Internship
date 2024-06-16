@@ -45,7 +45,7 @@ const Form = () => {
                       name='message'
                       placeholder='Write here...'
                       onChange={handleChange}
-                      value={form.message}
+                      value={form?.message}
                       required
                   />
                   <button className='attach'>

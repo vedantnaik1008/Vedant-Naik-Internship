@@ -15,9 +15,9 @@ const ContactUs = () => {
     const disabledLoggedOutState = !auth.logged
         ? form.name.length === 0 ||
           form.phoneNumber.toString().length <= 9 ||
-          form.message.length === 0 ||
+          form?.message.length === 0 ||
           !emailRegex.test(form.email)
-        : form.name.length === 0 || form.message.length === 0;
+        : form.name.length === 0 || form?.message.length === 0;
 
     return (
         <form
@@ -91,7 +91,7 @@ const ContactUs = () => {
                     placeholder={'Write here...'}
                     name={'message'}
                     handleChange={handleChange}
-                    value={form.message}
+                    value={form?.message}
                     require={true}
                     requireLabelName={true}
                     className={'attach'}

@@ -13,10 +13,8 @@ export const ContextProvider = ({ children }) => {
         name: '',
         number: 0,
         emailError: '',
-        submitEvent: {
-            submitMessage: '',
-            fireSubmit: false
-        }
+        submitEvent: false,
+        submitMessage: ''
     });
 
     return (
@@ -30,7 +28,6 @@ export const ContextProvider = ({ children }) => {
                 setTab,
                 auth,
                 setAuth,
-                submitEvent: auth.submitEvent
             }}>
             {children}
         </MyContext.Provider>
