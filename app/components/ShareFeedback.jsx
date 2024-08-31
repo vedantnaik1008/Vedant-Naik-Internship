@@ -9,7 +9,7 @@ import Textarea from './Textarea';
 
 const ShareFeedback = () => {
     const { optionClick, auth, setAuth } = useContext(MyContext);
-    const { handleChange, handleSubmit ,emailRegex, form, setForm } =
+    const { handleRemoveFile, handleChange, handleSubmit ,emailRegex, form, setForm } =
         useEmail();
     const disabledLoggedOutState = !auth.logged
         ? form?.message.length === 0 || !emailRegex.test(form.email)
@@ -31,6 +31,8 @@ const ShareFeedback = () => {
                     placeholder={'Write here...'}
                     name={'message'}
                     handleChange={handleChange}
+                    handleRemoveFile={handleRemoveFile}
+                    form={form}
                     value={form?.message}
                     require={true}
                     requireLabelName={false}

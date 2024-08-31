@@ -43,27 +43,25 @@ header nav ul li {
     gap: 2.96px;
 }
 
-.header-title span:nth-child(1),.header-title span:nth-child(3) {
-
+.header-title span:nth-child(1),
+.header-title span:nth-child(3) {
     color: #f8f8f8;
-font-size: 8.26px;
-font-weight: 600;
-line-height: 13.7px;
-letter-spacing: 1.8553520441055298px;
-text-align: center;
-
-
+    font-size: 8.26px;
+    font-weight: 600;
+    line-height: 13.7px;
+    letter-spacing: 1.8553520441055298px;
+    text-align: center;
 }
 
 .header-title span:nth-child(2) {
     background-color: #ffffff;
     color: #2a2a2a;
-padding: 0.03px 1.25px 0.03px 1.25px;
-font-size: 8.26px;
-font-weight: 600;
-line-height: 13.7px;
-letter-spacing: 1.8553520441055298px;
-text-align: center;
+    padding: 0.03px 1.25px 0.03px 1.25px;
+    font-size: 8.26px;
+    font-weight: 600;
+    line-height: 13.7px;
+    letter-spacing: 1.8553520441055298px;
+    text-align: center;
 }
 
 .main-container {
@@ -74,7 +72,7 @@ text-align: center;
 main,
 .section-container {
     padding: 11px 0px;
-     width: 90%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -324,8 +322,8 @@ hr {
     margin: 30px auto 0 auto;
 }
 
-.question-frame-margin{
-margin: 0px auto 20px auto;
+.question-frame-margin {
+    margin: 0px auto 20px auto;
 }
 
 .section-question-frame .question-first-row {
@@ -397,13 +395,12 @@ margin: 0px auto 20px auto;
     width: 65.5%;
 }
 
-.answer-container-flex{
- display: flex;
- flex-direction: column;
-
+.answer-container-flex {
+    display: flex;
+    flex-direction: column;
 }
 
- .answers-sortby {
+.answers-sortby {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -411,29 +408,27 @@ margin: 0px auto 20px auto;
     margin: 20px auto;
 }
 
-.answer-sortby-order{
+.answer-sortby-order {
     order: -1;
     margin: 0px auto 20px auto;
     transition: all 300ms ease-in-out;
 }
 
-
-
- .answers-sortby p {
+.answers-sortby p {
     font-size: 24px;
     font-weight: 700;
     line-height: 36px;
     color: #f8f8f8;
 }
 
- .answers-sortby label {
+.answers-sortby label {
     display: flex;
     align-items: center;
     gap: 10px;
     position: relative;
 }
 
- .answers-sortby label p {
+.answers-sortby label p {
     font-size: 18px;
     font-weight: 500;
     line-height: 21.78px;
@@ -441,7 +436,7 @@ margin: 0px auto 20px auto;
     color: #f8f8f8;
 }
 
- .answers-sortby label select {
+.answers-sortby label select {
     padding: 8px 40px 8px 16px;
     border-radius: 6px;
     font-size: 18px;
@@ -453,7 +448,7 @@ margin: 0px auto 20px auto;
     appearance: none;
 }
 
- .answers-sortby label .down-arrow {
+.answers-sortby label .down-arrow {
     position: absolute;
     top: 19px;
     right: 12px;
@@ -588,39 +583,39 @@ margin: 0px auto 20px auto;
     width: 100%;
 }
 
-.fab-messages{
+.fab-messages {
     display: flex;
     flex-direction: column;
     align-items: end;
     position: relative;
 }
 
-.fab-messages p{
-font-size: 12px;
-font-weight: 600;
-line-height: 18px;
-text-align: center;
-color: #0F0F0F;
-background: #F8F8F8;
-padding: 10px;
-margin-bottom: 20px;
-border-radius: 6px;
-position: fixed;
-bottom: 70px;
-width: 280px;
+.fab-messages p {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: center;
+    color: #0f0f0f;
+    background: #f8f8f8;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    position: fixed;
+    bottom: 70px;
+    width: 280px;
 }
 
-.fab-messages p::after{
+.fab-messages p::after {
     content: '';
     position: absolute;
     bottom: -1px;
     right: 15px;
-margin-top:-6px;
-  margin-left:-5px;
-  border-left: 12px solid #F8F8F8;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  transform:rotate(224deg);
+    margin-top: -6px;
+    margin-left: -5px;
+    border-left: 12px solid #f8f8f8;
+    border-right: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    transform: rotate(224deg);
 }
 
 .fab-mobile {
@@ -654,15 +649,17 @@ margin-top:-6px;
     gap: 15px;
 }
 
-.option-list-float, .close-float{
- position: fixed;
- right: 24px;
- bottom: 24px;
+.option-list-float,
+.close-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
 }
 
-.option-list-unfloat, .close-unfloat{
- position: static;
- /* right: 24px;
+.option-list-unfloat,
+.close-unfloat {
+    position: static;
+    /* right: 24px;
  bottom: 24px; */
 }
 
@@ -710,20 +707,20 @@ margin-top:-6px;
     justify-content: center;
 }
 
-.fab-parent{
-position: absolute;
+.fab-parent {
+    position: absolute;
     bottom: 0%;
     right: 0%;
     left: 0px;
     z-index: 100;
 }
 
-.fab-desktop-svg{
-        display: none;
-    }
+.fab-desktop-svg {
+    display: none;
+}
 
-.fab-parent .rounded-outline{
-    outline: 2px solid #F8F8F8F8;
+.fab-parent .rounded-outline {
+    outline: 2px solid #f8f8f8f8;
     outline-offset: 3px;
 }
 
@@ -739,13 +736,13 @@ form {
     transition: all 300ms ease-in-out;
 }
 
-.form-show{
-transform: translateY(0%);
+.form-show {
+    transform: translateY(0%);
 }
 
-.form-close{
-transform: translateY(100%);
-display: none;
+.form-close {
+    transform: translateY(100%);
+    display: none;
 }
 
 form h2 {
@@ -800,26 +797,34 @@ form .form-container {
     line-height: 16px;
     color: #333333;
 }
-.form-container .flex select option{
-padding: 18px 16px 18px 16px;
-background: #E0E0E0;
-font-weight: 400;
-color: #333333;
+.form-container .flex select option {
+    padding: 18px 16px 18px 16px;
+    background: #e0e0e0;
+    font-weight: 400;
+    color: #333333;
 }
 
-
+.form-container .textarea-attach {
+    background: #e0e0e0;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
 
 .form-container .flex textarea {
     padding: 12px;
-    border-radius: 4px;
-    border: 1px solid #cccccc;
-    background: #e0e0e0;
+    border: none;
     height: 180px;
+    background: #e0e0e0;
     resize: none;
     color: #333333;
     font-size: 16px;
     font-weight: 400;
     line-height: 20.8px;
+    width: 100%;
+}
+
+.form-container .flex textarea:focus {
+    outline: none;
 }
 
 .form-container .flex .attach {
@@ -831,18 +836,30 @@ color: #333333;
     line-height: 16px;
     display: flex;
     gap: 4px;
+    width: 80px;
     align-items: center;
     color: #333333;
-    position: absolute;
-    top: 160px;
-    left: 10px;
     border: none;
 }
 
-form .form-container button {
+
+.custom-file-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+}
+
+input[type='file']{
+ display: none;
+}
+
+
+
+form .form-container .submit-buttons button {
     padding: 10px 20px 10px 20px;
     border-radius: 4px;
-    margin-top: 15px;
+    margin: 0 0 10px 10px;
     align-self: flex-end;
     background: #0f0f0f;
     border: none;
@@ -857,28 +874,27 @@ form .form-container button:disabled {
     opacity: 0.6;
 }
 
-input[type="checkbox"]{
+input[type='checkbox'] {
     accent-color: #808080;
 }
 
-.error{
-font-size: 12px;
-font-weight: 500;
-line-height: 12px;
-text-align: left;
-color: #FD443A;
+.error {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    text-align: left;
+    color: #fd443a;
 }
 
 .option-list-1,
-.close-1{
+.close-1 {
     bottom: 24px;
     right: 24px;
     display: flex;
     flex-direction: column;
-    
 }
 
-.option-animate-show{
+.option-animate-show {
     /* bottom: 500px;
     right: 10px; */
     display: flex;
@@ -886,7 +902,7 @@ color: #FD443A;
     margin: 0 10px 20px 0;
 }
 
-.option-animate-close{
+.option-animate-close {
     bottom: 24px;
     right: 0px;
     display: flex;
@@ -894,8 +910,9 @@ color: #FD443A;
     margin: 0 auto;
 }
 
-.option-list , .close {
-   align-items: end;
+.option-list,
+.close {
+    align-items: end;
 }
 
 .option-list .flex .removed,
@@ -903,21 +920,20 @@ color: #FD443A;
     display: none;
 }
 
-.anonymous{
+.anonymous {
     display: flex;
     gap: 5px;
     align-items: center;
-font-size: 14px;
-font-weight: 500;
-line-height: 14px;
-color: #4D4D4D;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+    color: #4d4d4d;
 }
 
-.anonymous input{
+.anonymous input {
     border: 1.5px solid #808080;
-padding: 8px;
-border-radius: 2px;
-
+    padding: 8px;
+    border-radius: 2px;
 }
 
 .form-container .flex .attach-sharefeedback {
@@ -931,35 +947,55 @@ border-radius: 2px;
     gap: 4px;
     align-items: center;
     color: #333333;
-    position: absolute;
-    top: 130px;
-    left: 10px;
     border: none;
 }
-
-.form-container .flex .contact-input{
- 
-padding: 10px 12px 10px 12px;
-border-radius: 4px 0px 0px 0px;
-border: 1px solid #CCCCCC;
-background: #E0E0E0;
-}
-.form-container .flex .contact-input::placeholder, .form-container .flex .report-issue-input::placeholder{
-color: #808080;
+.file-remover-container{
+   
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
 }
 
-.form-container .flex .report-issue-input{
-padding: 10px 12px 10px 12px;
-border-radius: 4px;
-border: 1px solid #B3B3B3;
+.file-remover-container div{
+ position: relative;
+}
+
+.file-remover-container div img{
+    border-radius: 20%;
+}
+
+.file-remover-container button{
+position: absolute;
+right: 4px;
+top: 0;
+border-radius: 50%;
+border: none;
+color: rgb(239, 6, 6);
 background-color: transparent;
-font-size: 16px;
-font-weight: 400;
-line-height: 16px;
-color: #0F0F0F;
+}
+.form-container .flex .contact-input {
+    padding: 10px 12px 10px 12px;
+    border-radius: 4px 0px 0px 0px;
+    border: 1px solid #cccccc;
+    background: #e0e0e0;
+}
+.form-container .flex .contact-input::placeholder,
+.form-container .flex .report-issue-input::placeholder {
+    color: #808080;
 }
 
-.submit-buttons{
+.form-container .flex .report-issue-input {
+    padding: 10px 12px 10px 12px;
+    border-radius: 4px;
+    border: 1px solid #b3b3b3;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #0f0f0f;
+}
+
+.submit-buttons {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -969,16 +1005,15 @@ color: #0F0F0F;
 }
 
 @media screen and (min-width: 1024px) {
-  .answer-container-flex .section-answer-frame {
+    .answer-container-flex .section-answer-frame {
         width: 66.5%;
     }
     .answer-container-flex .section-question-frame {
         width: 66.5%;
     }
-    .answers-sortby{
+    .answers-sortby {
         width: 66.5%;
     }
-    
 }
 
 /* @media screen and (max-width: 1024px) {
@@ -994,14 +1029,14 @@ color: #0F0F0F;
 @media screen and (min-width: 768px) {
     .header-title span:nth-child(2) {
         padding: 6.66px 3.59px 6.66px 3.59px;
-font-size: 24.6px;
-font-weight: 600;
-line-height: 15.14px;
-letter-spacing: 2.049896001815796px;
-text-align: center;
-
+        font-size: 24.6px;
+        font-weight: 600;
+        line-height: 15.14px;
+        letter-spacing: 2.049896001815796px;
+        text-align: center;
     }
-    .header-title span:nth-child(1), .header-title span:nth-child(3){
+    .header-title span:nth-child(1),
+    .header-title span:nth-child(3) {
         font-size: 24.6px;
         line-height: 15.14px;
         letter-spacing: 2.049896001815796px;
@@ -1043,44 +1078,44 @@ text-align: center;
     .section {
         display: block;
     }
-    .fab-messages p{
+    .fab-messages p {
         z-index: 99;
     }
-    .fab-parent{
+    .fab-parent {
         display: flex;
         flex-direction: column;
         align-items: end;
     }
-.fab-mobile{
-    box-shadow: 1px 1px 8px 0px #00000080;
-    width: 52px;
-    height: 52px;
-
-}
-    .fab-mobile-svg{
+    .fab-mobile {
+        box-shadow: 1px 1px 8px 0px #00000080;
+        width: 52px;
+        height: 52px;
+    }
+    .fab-mobile-svg {
         display: none;
     }
 
-    .fab-desktop-svg{
+    .fab-desktop-svg {
         display: block;
     }
-    .option-list .flex button, .close .flex button{
+    .option-list .flex button,
+    .close .flex button {
         width: 52px;
         height: 52px;
         border-radius: 50%;
     }
-    .option-animate-show{
+    .option-animate-show {
         order: 1;
     }
-    .overlay{
+    .overlay {
         display: none;
     }
-    form{
+    form {
         border-radius: 20px;
         box-shadow: -2px 4px 16px 0px #00000029;
-padding: 24px 16px 24px 16px;
-width: 430px;
-margin: 0 10px 10px 0;
+        padding: 24px 16px 24px 16px;
+        width: 430px;
+        margin: 0 10px 10px 0;
     }
     .section-answer-frame {
         width: unset;

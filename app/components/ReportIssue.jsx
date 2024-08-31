@@ -9,7 +9,14 @@ import Textarea from './Textarea';
 
 const ReportIssue = () => {
     const { optionClick, auth, setAuth } = useContext(MyContext);
-    const { handleChange, handleSubmit, emailRegex, form, setForm } = useEmail();
+    const {
+        handleRemoveFile,
+        handleChange,
+        handleSubmit,
+        emailRegex,
+        form,
+        setForm
+    } = useEmail();
 
     const disabledLoggedOutState = !auth.logged
         ? form?.message.length === 0 || !emailRegex.test(form.email)
@@ -48,7 +55,9 @@ const ReportIssue = () => {
                     labelName={'Describe the issue in detail'}
                     placeholder={'Write here...'}
                     name={'message'}
+                    form={form}
                     handleChange={handleChange}
+                    handleRemoveFile={handleRemoveFile}
                     value={form?.message}
                     require={true}
                     requireLabelName={true}

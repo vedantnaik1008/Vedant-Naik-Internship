@@ -9,7 +9,7 @@ import { MyContext } from '../Provider/contextProvider';
 
 const FabButton = ({ click, setClick, setOptionClick }) => {
     const { form, setForm } = useEmail();
-    const { setAuth, auth, setTab } = useContext(MyContext);
+    const { setAuth, auth, setTab, tab } = useContext(MyContext);
 
     useEffect(() => {
         let timer;
@@ -40,7 +40,8 @@ const FabButton = ({ click, setClick, setOptionClick }) => {
                 onClick={() => {
                     setOptionClick(false);
                     setClick(!click);
-                    setTab('')
+                    setTab('');
+                    localStorage.clear(`formData_${tab}`);
                 }}>
                 {!click ? (
                     <>

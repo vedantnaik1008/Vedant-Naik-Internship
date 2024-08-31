@@ -9,8 +9,13 @@ import Textarea from './Textarea';
 const ContactUs = () => {
     const { optionClick, auth, setAuth } = useContext(MyContext);
 
-    const { handleChange, handleSubmit, emailRegex, form, setForm } =
-        useEmail();
+    const {
+        handleRemoveFile, handleChange,
+        handleSubmit,
+        emailRegex,
+        form,
+        setForm
+    } = useEmail();
 
     const disabledLoggedOutState = !auth.logged
         ? form.name.length === 0 ||
@@ -91,7 +96,9 @@ const ContactUs = () => {
                     placeholder={'Write here...'}
                     name={'message'}
                     handleChange={handleChange}
+                    handleRemoveFile={handleRemoveFile}
                     value={form?.message}
+                    form={form}
                     require={true}
                     requireLabelName={true}
                     className={'attach'}

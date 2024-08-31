@@ -12,22 +12,72 @@ export const useEmail = () => {
         emailErrorMessage: '',
         phoneNumber: 0,
         name: '',
+        files: [],
         message: '',
         submit: false,
         submitMessage: ''
     });
-    
+
+    // const array = [
+    //     'report issue',
+    //     'share feedback',
+    //     'give suggestion',
+    //     'contact us'
+    // ];
     useEffect(() => {
-        const storedData = localStorage.getItem('formData');
+        const storedData = localStorage.getItem(`formData_${tab}`);
         if (storedData) {
             const parsedData = JSON.parse(storedData);
             setForm(parsedData);
         }
     }, []);
 
+    useEffect(() => {
+        localStorage.setItem(`formData_${tab}`, JSON.stringify(form));
+    }, [form, tab]);
+    
     const handleChange = (e) => {
-        setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value, type, files } = e.target;
+
+        if (type === 'file') {
+            setForm((prev) => ({
+                ...prev,
+                files: [...prev.files, ...Array.from(files)]
+            }));
+        } else {
+            setForm((prev) => ({ ...prev, [name]: value }));
+        }
+        localStorage.setItem(`formData_${tab}`, JSON.stringify(form));
     };
+
+    const handleRemoveFile = (index) => {
+        setForm((prev) => ({
+            ...prev,
+            files: prev.files.filter((_, i) => i !== index)
+        }));
+    };
+
+      const createImagePreview = (file) => {
+          if (!(file instanceof File)) {
+              console.warn('Not a valid File object:', file);
+              return;
+          }
+
+          const reader = new FileReader();
+          reader.onloadend = () => {
+              setForm((prev) => ({
+                  ...prev,
+                  files: prev.files.map((f) =>
+                      f === file ? { ...f, preview: reader.result } : f
+                  )
+              }));
+          };
+          reader.readAsDataURL(file);
+      };
+
+     useEffect(() => {
+         form.files.forEach(createImagePreview);
+     }, [form.files]);
 
     let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const handleSubmit = (e) => {
@@ -65,7 +115,17 @@ export const useEmail = () => {
                 submitMessage: currentTabMessage
             }));
         }
+        
+        localStorage.clear(`formData_${tab}`);
     };
 
-    return { handleChange, handleSubmit, emailRegex, form, setForm };
+    return {
+        handleRemoveFile,
+        handleChange,
+        handleSubmit,
+        emailRegex,
+        form,
+        createImagePreview,
+        setForm
+    };
 };
