@@ -18,12 +18,6 @@ export const useEmail = () => {
         submitMessage: ''
     });
 
-    // const array = [
-    //     'report issue',
-    //     'share feedback',
-    //     'give suggestion',
-    //     'contact us'
-    // ];
     useEffect(() => {
         const storedData = localStorage.getItem(`formData_${tab}`);
         if (storedData) {

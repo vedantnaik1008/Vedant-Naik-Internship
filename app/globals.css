@@ -708,7 +708,7 @@ hr {
 }
 
 .fab-parent {
-    position: absolute;
+    position: fixed;
     bottom: 0%;
     right: 0%;
     left: 0px;
@@ -770,6 +770,9 @@ form .form-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    height: 50dvh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .form-container .flex {

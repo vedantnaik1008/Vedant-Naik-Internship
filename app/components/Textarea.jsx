@@ -2,7 +2,8 @@ import Image from 'next/image';
 import redStar from '@/public/svg/red-star.svg';
 import attach from '@/public/svg/attach.svg';
 import { useEmail } from '../hooks/useEmail';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { MyContext } from '../Provider/contextProvider';
 
 const Textarea = ({
     form,
@@ -17,7 +18,9 @@ const Textarea = ({
     requireLabelName,
     className
 }) => {
-    const {createImagePreview} = useEmail()
+        const { tab } = useContext(MyContext);
+    
+    const {createImagePreview} = useEmail({unique: tab})
     useEffect(() => {
         // Re-create previews for existing files after initial render
         form.files.forEach(createImagePreview);

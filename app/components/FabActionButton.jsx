@@ -11,6 +11,7 @@ const ContactUs = dynamic(() => import('./ContactUs'));
 const FabActionButton = () => {
     const { click, optionClick, setOptionClick, tab, setTab, auth, setClick } =
         useContext(MyContext);
+
     return (
         <>
             {click && <div className='overlay' />}

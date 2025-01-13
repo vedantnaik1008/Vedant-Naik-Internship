@@ -3,13 +3,12 @@ import fab_mobile_svg from '@/public/svg/fab-mobile-star-hand.svg';
 import fab_desktop_svg from '@/public/svg/fab-desktop-svg.svg';
 import close_form from '@/public/svg/close-form.svg';
 import Image from 'next/image';
-import { useEmail } from '../hooks/useEmail';
 import { useContext, useEffect } from 'react';
 import { MyContext } from '../Provider/contextProvider';
 
 const FabButton = ({ click, setClick, setOptionClick }) => {
-    const { form, setForm } = useEmail();
     const { setAuth, auth, setTab, tab } = useContext(MyContext);
+
 
     useEffect(() => {
         let timer;
@@ -41,7 +40,7 @@ const FabButton = ({ click, setClick, setOptionClick }) => {
                     setOptionClick(false);
                     setClick(!click);
                     setTab('');
-                    localStorage.clear(`formData_${tab}`);
+                    // localStorage.clear(`formData_${tab}`);
                 }}>
                 {!click ? (
                     <>
