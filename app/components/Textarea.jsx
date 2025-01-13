@@ -1,9 +1,12 @@
 import Image from 'next/image';
 import redStar from '@/public/svg/red-star.svg';
 import attach from '@/public/svg/attach.svg';
-import { useEmail } from '../hooks/useEmail';
-import { useContext, useEffect } from 'react';
-import { MyContext } from '../Provider/contextProvider';
+// import { useEmail } from '../hooks/useEmail';
+//
+//  useContext,
+import { useEffect } from 'react';
+//
+// import { MyContext } from '../Provider/contextProvider';
 
 const Textarea = ({
     form,
@@ -16,11 +19,12 @@ const Textarea = ({
     handleChange,
     value,
     requireLabelName,
-    className
+    className,
+    createImagePreview
 }) => {
-        const { tab } = useContext(MyContext);
-    
-    const {createImagePreview} = useEmail({unique: tab})
+    // const { tab } = useContext(MyContext);
+
+    // const {createImagePreview} = useEmail({unique: tab})
     useEffect(() => {
         // Re-create previews for existing files after initial render
         form.files.forEach(createImagePreview);
@@ -50,6 +54,13 @@ const Textarea = ({
                             multiple
                             name='files'
                             onChange={(e) => {
+                                if (
+                                    form.files.length + e.target.files.length >
+                                    5
+                                ) {
+                                    alert('You can only upload up to 5 files.');
+                                    return;
+                                }
                                 handleChange(e);
                                 Array.from(e.target.files).forEach(
                                     createImagePreview
@@ -68,7 +79,7 @@ const Textarea = ({
                     </label>
                     <div className='file-remover-container'>
                         {form.files.map((file, index) => (
-                            <div key={index} >
+                            <div key={index}>
                                 {file.preview ? (
                                     <Image
                                         src={file.preview}
@@ -79,7 +90,9 @@ const Textarea = ({
                                 ) : (
                                     file.name
                                 )}
-                                <button type='button' onClick={() => handleRemoveFile(index)}>
+                                <button
+                                    type='button'
+                                    onClick={() => handleRemoveFile(index)}>
                                     x
                                 </button>
                             </div>

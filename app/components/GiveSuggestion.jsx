@@ -171,6 +171,7 @@ const GiveSuggestion = () => {
                     require={true}
                     requireLabelName={true}
                     className={'attach'}
+                    createImagePreview={createImagePreview}
                 />
                 {!auth.logged && (
                     <Input

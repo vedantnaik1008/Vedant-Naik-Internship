@@ -146,9 +146,7 @@ const ReportIssue = () => {
                 <div className='flex'>
                     <label htmlFor=''>Choose a section</label>
                     <select>
-                        <option value=''>
-                            
-                        </option>
+                        <option value=''></option>
                         <option value='Concept cards'>Concept cards</option>
                         <option value='Interview Questions'>
                             Interview Questions
@@ -172,6 +170,7 @@ const ReportIssue = () => {
                     require={true}
                     requireLabelName={true}
                     className={'attach'}
+                    createImagePreview={createImagePreview}
                 />
 
                 {!auth.logged && (

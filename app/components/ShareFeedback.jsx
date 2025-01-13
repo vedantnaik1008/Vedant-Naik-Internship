@@ -148,6 +148,7 @@ const ShareFeedback = () => {
                     require={true}
                     requireLabelName={false}
                     className={'attach-sharefeedback'}
+                    createImagePreview={createImagePreview}
                 />
                 {auth.logged && (
                     <label htmlFor='' className='anonymous'>

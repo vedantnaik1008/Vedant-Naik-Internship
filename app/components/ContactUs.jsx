@@ -212,6 +212,7 @@ const ContactUs = () => {
                     require={true}
                     requireLabelName={true}
                     className={'attach'}
+                    createImagePreview={createImagePreview}
                 />
                 <SubmitButton
                     disabledLoggedOutState={disabledLoggedOutState}
